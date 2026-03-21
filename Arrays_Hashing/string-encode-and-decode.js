@@ -1,7 +1,22 @@
+//** https://neetcode.io/problems/string-encode-and-decode/question?list=neetcode150
+/*
+Problem: Encode and Decode Strings
+Category: Arrays / Strings
+Pattern: Length Prefix Encoding
+Time Complexity: 
+  encode: O(n)
+  decode: O(n)
+Space Complexity: O(n)
+
+Key Idea: Guardar cada string como <longitud>#<contenido>.
+Así, al decodificar, primero leo la longitud y luego sé exactamente
+cuántos caracteres tomar, aunque el string tenga símbolos como "#".
+*/
 class Solution {
   encode(strs) {
     let res = "";
 
+    // Guardamos: longitud + separador + string - Ejemplo: "neet" -> "4#neet"
     for (const s of strs) {
       res += s.length + "#" + s;
     }

@@ -1,4 +1,15 @@
-// XOR cancela parejas:
+//** https://leetcode.com/problems/single-number/
+/*
+Problem: Single Number
+Category: Bit Manipulation
+Pattern: XOR Cancellation
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Key Idea:
+XOR cancels equal numbers (a ^ a = 0).
+By XOR-ing all elements, duplicate pairs disappear and only the unique number remains.
+*/
 // a ^ a = 0
 // a ^ 0 = a
 var singleNumber = function (nums) {

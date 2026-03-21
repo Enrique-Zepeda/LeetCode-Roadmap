@@ -1,9 +1,22 @@
+//** https://leetcode.com/problems/number-of-1-bits/description/
+/*
+Problem: Number of 1 Bits
+Category: Bit Manipulation
+Pattern: Brian Kernighan Algorithm
+Time Complexity: O(k)   // k = número de bits en 1
+Space Complexity: O(1)
+
+Key Idea:
+Cada operación n & (n - 1) elimina el bit 1 menos significativo.
+Así contamos solo los bits encendidos en lugar de recorrer los 32 bits.
+*/
+
 var hammingWeight = function (n) {
   let count = 0; // contador de bits en 1
 
   while (n !== 0) {
     n &= n - 1; // elimina el bit 1 más a la derecha
-    count++;
+    count++; // contamos ese bit eliminado
   }
 
   return count;
