@@ -26,7 +26,7 @@ function isPalindrome(s) {
     }
 
     // skip invalid characters from right
-    while (l < r && !isAlphaNumeric(s[r])) {
+    while (r > l && !isAlphaNumeric(s[r])) {
       r--;
     }
 
