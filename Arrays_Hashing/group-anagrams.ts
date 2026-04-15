@@ -1,21 +1,29 @@
-function isAnagram(s: string, t: string): boolean {
-  if (s.length !== t.length) return false;
+const groupAnagrams = (strs: string[]): string[][] => {
+  // Creamos un objeto donde:
+  // clave -> palabra ordenada (ej: "aet")
+  // valor -> arreglo de strings que son anagramas
+  const group: Record<string, string[]> = {};
 
-  const countS: Record<string, number> = {};
-  const countT: Record<string, number> = {};
+  // Recorremos cada palabra del arreglo
+  for (const s of strs) {
+    // Convertimos la palabra en una "firma":
+    // - la separamos en letras
+    // - las ordenamos
+    // - las volvemos a unir
+    // Ej: "eat" -> "aet"
+    const word: string = s.split("").sort().join("");
 
-  for (let i = 0; i < s.length; i++) {
-    countS[s[i]] = (countS[s[i]] || 0) + 1;
-    countT[t[i]] = (countT[t[i]] || 0) + 1;
+    // Si aún no existe esa clave en el objeto,
+    // la inicializamos con un arreglo vacío
+    if (!group[word]) {
+      group[word] = [];
+    }
+
+    // Agregamos la palabra original al grupo correspondiente
+    group[word].push(s);
   }
 
-  for (const key in countS) {
-    if (countS[key] !== countT[key]) return false;
-  }
-
-  return true;
-}
-
-console.log(isAnagram("anagram", "nagaram"));
-
-export {};
+  // Retornamos solo los valores del objeto,
+  // es decir, los grupos de anagramas
+  return Object.values(group);
+};
