@@ -1,4 +1,5 @@
 /*
+https://leetcode.com/problems/car-fleet/description/
 Problem: Car Fleet
 Category: Stack
 Pattern: Sorting + Monotonic Stack
@@ -8,7 +9,7 @@ Space Complexity: O(n)
 Key Idea:
 Sort cars from closest to the target to farthest.
 For each car, calculate its time to reach the target.
-If a car behind reaches the target earlier or at the same time
+If a car behind reaches the target earlier or at thcar-fleete same time
 as the fleet ahead, it joins that fleet.
 */
 
