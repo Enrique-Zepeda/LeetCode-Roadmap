@@ -1,29 +1,57 @@
-const groupAnagrams = (strs: string[]): string[][] => {
-  // Creamos un objeto donde:
-  // clave -> palabra ordenada (ej: "aet")
-  // valor -> arreglo de strings que son anagramas
-  const group: Record<string, string[]> = {};
+/*
+https://leetcode.com/problems/group-anagrams/description/
+Problem: Group Anagrams
+Category: Hashing
+Pattern: Frequency Array as Key
+Time Complexity: O(n * k)
+  - n = number of strings
+  - k = average length of each string
 
-  // Recorremos cada palabra del arreglo
-  for (const s of strs) {
-    // Convertimos la palabra en una "firma":
-    // - la separamos en letras
-    // - las ordenamos
-    // - las volvemos a unir
-    // Ej: "eat" -> "aet"
-    const word: string = s.split("").sort().join("");
+Space Complexity: O(n * k)
 
-    // Si aún no existe esa clave en el objeto,
-    // la inicializamos con un arreglo vacío
-    if (!group[word]) {
-      group[word] = [];
+Key Idea:
+Anagrams have the same letter frequencies.
+
+Example:
+"eat", "tea", "ate"
+
+All have:
+a:1, e:1, t:1
+
+So instead of sorting each word, we count how many times each letter appears
+and use that frequency array as a unique key.
+*/
+
+function groupAnagrams(strs: string[]): string[][] {
+  // Stores groups of anagrams.
+  // Key: frequency count of letters
+  // Value: words that match that frequency
+  const groups: Record<string, string[]> = {};
+
+  for (const word of strs) {
+    // Array of 26 positions, one for each lowercase letter a-z
+    const count = new Array(26).fill(0);
+
+    // Count frequency of each character in the current word
+    for (const char of word) {
+      count[char.charCodeAt(0) - 97]++;
     }
 
-    // Agregamos la palabra original al grupo correspondiente
-    group[word].push(s);
+    // Convert the frequency array into a string key
+    // Example: [1,0,0,0,1,...,1,...] -> "1,0,0,0,1,..."
+    const key = count.join(",");
+
+    // If this key does not exist yet, create a new group
+    if (!groups[key]) {
+      groups[key] = [];
+    }
+
+    // Add the word to its anagram group
+    groups[key].push(word);
   }
 
-  // Retornamos solo los valores del objeto,
-  // es decir, los grupos de anagramas
-  return Object.values(group);
-};
+  // Return only the grouped values
+  return Object.values(groups);
+}
+
+console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]));

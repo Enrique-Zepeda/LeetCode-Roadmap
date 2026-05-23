@@ -6,7 +6,7 @@ const isValidSudoku = (board: string[][]): boolean => {
 
   for (let r = 0; r < 9; r++) {
     for (let c = 0; c < 9; c++) {
-      const char = board[r][r]; // Cambié board[r][c] a una constante para legibilidad
+      const char = board[r][c]; // Cambié board[r][c] a una constante para legibilidad
 
       if (char === ".") continue;
 
